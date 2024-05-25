@@ -376,8 +376,11 @@ interface IFormValidation {
 }
 ```
 
-//Интерфейс успешное оформление заказа
+Интерфейс успешное оформление заказа
+
+```
 export interface IOrderSuccess {
 id: string;
 count: number;
 }
+```
