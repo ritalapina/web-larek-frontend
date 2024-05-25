@@ -68,7 +68,7 @@ yarn build
 
 Класс EventEmitter позволяет объектам генерировать события, которые могут быть прослушаны другими объектами, подписанными на эти события.
 
-Методы:
+**Методы:**
 
 - on(eventName: EventName, callback: (event: T) => void) - установить обработчик на событие;
 - off(eventName: EventName, callback: Subscriber) - снять обработчик с события;
@@ -112,7 +112,6 @@ yarn build
 Класс Component обеспечивает работу с DOM. Его функции - устанавливать данные в компонентах и отображать их.
 
 Методы
-
 - toggleClass(element: HTMLElement, className: string, force?: boolean) - переключить класс
 - setText(element: HTMLElement, value: string) - установить текстовое содержимое
 - setDisabled(element: HTMLElement, state: boolean) - сменить статус блокировки
@@ -174,13 +173,13 @@ yarn build
 
 Предназначен для реализации модального окна корзины покупок. Наследуется от класса Component.
 
-Свойства:
+**Свойства:**
 
 - protected \_list: HTMLElement - элемент, содержащий список товаров в корзине;
 - protected \_total: HTMLElement - элемент, отображающий общую стоимость товаров в корзине;
 - protected \_button: HTMLElement - элемент, представляющий кнопку действия (например, "Оформить заказ");
 
-Конструктор:
+**Конструктор:**
 
 - constructor(container: HTMLElement, protected events: EventEmitter) - принимает корневой элемент для корзины и объект событий;
 
