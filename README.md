@@ -64,7 +64,6 @@ yarn build
 
 **2. Описание классов и их предназначение.**
 
-
 #### Класс EventEmitter
 
 Класс EventEmitter позволяет объектам генерировать события, которые могут быть прослушаны другими объектами, подписанными на эти события.
@@ -97,6 +96,16 @@ yarn build
 - protected handleResponse(response: Response): Promise<object> - защищеный метод, обрабатывает полученный ответ от сервера. Если ответ положительный (response.ok), он возвращает содержимое ответа в виде JSON. В противном случае, он возвращает содержимое ошибки из JSON-ответа;
 - get(uri: string) - отправляет запрос с данными и возвращает ответ сервера;
 - post(uri: string, data: object, method: ApiPostMethods = 'POST') - выполняет post запрос на сервер;
+
+#### LarekAPI
+
+LarekAPI предоставляя методы для работы с API магазина. Наследует функциональность базового класса Api, который обеспечивает выполнение запросов к серверу.
+
+Методы:
+
+- getProductList - получение списка всех товаров с сервера.
+- getProductItem - получение детальной информации о продукте по его ID.
+  orderProducts - Отправка информации о заказе на сервер и получение результата.
 
 #### Класс Model
 
@@ -136,12 +145,12 @@ yarn build
 - preview: string | null - идентификационный номер товара;
 - formErrors: FormErrors = {} - ошибки полей формы;
 
-
 Конструктор:
 
 - constructor() - конструктор наследуется от класса Model
 
 Методы:
+
 - addBasket() - добавляет выбранный товар в корзину;
 - clearBasket() - очищает корзину товаров;
 - getTotal() - возвращает общую стоимость выбранных товаров;
@@ -157,12 +166,10 @@ yarn build
 
 Класс для работы с модальными окнами. Наследуется от класса Component (реализация View). Класс используется для управления состоянием (открыт, закрыт) и отображением компонента модального окна
 
-
 Свойства:
 
 - protected \_closeButton: HTMLButtonElement - кнопка закрытия модального окна.;
 - protected \_content: HTMLElement - контент модального окна;
-
 
 Конструктор:
 
@@ -239,7 +246,7 @@ yarn build
 - set phone(value: string): void - установка номера телефона;
 - set email(value: string): void - установка почты;
 
-#### Класс DeliverForm
+#### Класс DeliveryForm
 
 Класс предназначен для управления отображением формы оформления доставки. Наследуется от класса Form. Класс используется для управления отображением данных (адрес) в компоненте формы заполнения данных пользователя
 
@@ -251,7 +258,6 @@ yarn build
 
 - set address(value: string): void - установка адреса заказа;
 
-  
 #### Класс Order
 
 Расширяет класс Form, предназначен для реализации модального окна заказа товара.
@@ -260,12 +266,11 @@ yarn build
 
 - \_offlinePay:HTMLElement - элемент, представляющий кнопку оплаты при получении;
 - \_onlinePay:HTMLElement - элемент, представляющий кнопку оплаты онлайн;
-  
 
 Конструктор:
 
 - constructor(container: HTMLFormElement, events: IEvents) - принимает элементы способа оплаты, форму доставки и контактных данных пользователя, объект событий;
-  
+
 Методы:
 
 - set payment(value: boolean) - выбор сособа оплаты;
@@ -299,7 +304,6 @@ yarn build
 - set image(value: string) - устанавливает изображение карточки;
 - set price(value: number | null) - устанавливает цену карточки;
 - inBasket(value: boolean) - устанавливает, находится ли карточка в корзине, и, если нет, отключает кнопку карточки.
-- 
 
 **3. Основные типы/интерфейсы проекта**
 
@@ -322,16 +326,16 @@ export interface IPage {
 }
 ```
 
-Данные карточки товара
+Данные товара
 
 ```
-export interface ICard {
+export interface ICardItem {
   id: string;
   description: string;
   image: string;
   title: string;
   category: string;
-  price: number;
+  price: number | null;
 }
 ```
 
@@ -351,7 +355,7 @@ export interface IOrder {
 
 ```
 export interface IBasket {
-  quantity: number;
+  items: HTMLElement[];
   title: string;
   price: number;
   totalPrice: number;
@@ -366,21 +370,21 @@ export interface IModal {
 }
 ```
 
+Интерфейс окна формы
+
+```
+export interface IForm {
+	valid: boolean;
+	errors: string[];
+}
+```
+
 Модальное окно Контакты
 
 ```
 export interface IContactForm {
     email: string;
     phone: string;
-}
-```
-
-Вадидация формы
-
-```
-interface IFormValidation {
-  valid: boolean;
-  errors: string[];
 }
 ```
 
