@@ -22,24 +22,24 @@ export class Basket extends Component<IBasket> {
 		}
 
 		this.items = [];
-		this._button.disabled = true;
+		this.setDisabled(this._button, true);
 	}
 
 	toggleButton(isDisabled: boolean) {
-		this._button.disabled = isDisabled;
+		this._button.disabled = isDisabled; 
 	}
 
 	set items(items: HTMLElement[]) {
-		if (items.length) {
-			this._list.replaceChildren(...items);
-		} else {
-			this._list.replaceChildren(
-				createElement<HTMLParagraphElement>('p', {
-					textContent: 'Корзина пуста',
-				})
-			);
-		}
-	}
+        if (items.length) {
+            this._list.replaceChildren(...items);
+            this.setDisabled(this._button, false);
+        } else {
+            const emptyMessage = createElement<HTMLParagraphElement>('p');
+            this.setText(emptyMessage, 'Корзина пуста');
+            this._list.replaceChildren(emptyMessage);
+            this.setDisabled(this._button, true);
+        }
+    }
 
 	set total(total: number) {
 		this.setText(this._total, `${total.toString()} синапсов`);

@@ -44,12 +44,12 @@ export class Card extends Component<ICard> {
 	}
 
 	disablePriceButton(value: number | null) {
-		if (!value) {
-			if (this._button) {
-				this._button.disabled = true;
-			}
-		}
-	}
+        if (!value) {
+            if (this._button) {
+                this.setDisabled(this._button, true); 
+            }
+        }
+    }
 
 	set id(value: string) {
 		this.container.dataset.id = value;
@@ -68,29 +68,29 @@ export class Card extends Component<ICard> {
 	}
 
 	set price(value: number | null) {
-		this.setText(
-			this._price,
-			value ? `${value.toString()} синапсов` : 'Бесценно'
-		);
-		this.disablePriceButton(value);
-	}
+        this.setText(
+            this._price,
+            value ? `${value.toString()} синапсов` : 'Бесценно'
+        );
+        this.setDisabled(this._button, !value); 
+    }
 
 	get price(): number {
 		return Number(this._price.textContent || '');
 	}
 
 	set category(value: string) {
-	this.setText(this._category, value);
-		this._category.classList.add(categoryTypes[value]);
-	}
+        this.setText(this._category, value); 
+		this.toggleClass(this._category, categoryTypes[value],true);
+    }
 
 	get category(): string {
 		return this._category.textContent || '';
 	}
 
 	set index(value: string) {
-		this._index.textContent = value;
-	}
+        this.setText(this._index, value);
+    }
 
 	get index(): string {
 		return this._index.textContent || '';
