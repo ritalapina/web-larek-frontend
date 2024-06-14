@@ -95,25 +95,23 @@ events.on('product:add', (item: ICardItem) => {
 events.on('product:delete', (item: ICardItem) => appData.removeFromBasket(item));
 
 // Изменения списка товаров в корзине 
-events.on('basket:changed', (items: ICardItem[]) => {
-    const total: number = items.reduce((number, item: ICardItem) =>  + item.price, 0);
-    
-    basket.items = items.map((item: ICardItem, index: number) => {
-        const card: Card = new Card(cloneTemplate(cardBasketTemplate), {
-            onClick: () => {
-                events.emit('product:delete', item);
-            },
-        });
-        return card.render({
-            index: `${index + 1}`,
-            title: item.title,
-            price: item.price,
-        });
-    });
-    
-    basket.total = total;
-    appData.order.total = total;
-    basket.toggleButton(total === 0);
+events.on('basket:changed', (items: ICardItem[]) => {    
+    basket.items = items.map((item, index) => {
+		const card = new Card(cloneTemplate(cardBasketTemplate), {
+			onClick: () => {
+				events.emit('product:delete', item);
+			},
+		});
+		return card.render({
+			index: (index + 1).toString(),
+			title: item.title,
+			price: item.price,
+		});
+	});
+	const total = items.reduce((total, item) => total + item.price, 0);
+	basket.total = total;
+	appData.order.total = total;
+	basket.toggleButton(total === 0);
 });
 
 events.on('counter:changed', (item: string[]) => {

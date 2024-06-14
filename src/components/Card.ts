@@ -43,13 +43,13 @@ export class Card extends Component<ICard> {
 		}
 	}
 
-	disablePriceButton(value: number | null) {
-        if (!value) {
-            if (this._button) {
-                this.setDisabled(this._button, true); 
-            }
-        }
-    }
+	disablePriceButton(value: number | null) { 
+        if (!value) { 
+            if (this._button) { 
+                this.setDisabled(this._button, true);  
+            } 
+        } 
+    } 
 
 	set id(value: string) {
 		this.container.dataset.id = value;
@@ -106,7 +106,7 @@ export class Card extends Component<ICard> {
 
 	set buttonTitle(value: string) {
 		if (this._button) {
-			this._button.textContent = value;
+			this.setText(this._button, value);
 		}
 	}
 }

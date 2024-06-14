@@ -19,7 +19,7 @@ export class DeliveryForm extends Form<IDeliveryForm> {
 			'button[name="cash"]',
 			this.container
 		);
-		this._cardButton.classList.add('button_alt-active');
+		this.toggleClass(this._cardButton, 'button_alt-active');
 
 		if (actions?.onClick) {
 			this._cardButton.addEventListener('click', actions.onClick);
@@ -28,8 +28,8 @@ export class DeliveryForm extends Form<IDeliveryForm> {
 	}
 
 	toggleButtons(target: HTMLElement) {
-		this._cardButton.classList.toggle('button_alt-active');
-		this._cashButton.classList.toggle('button_alt-active');
+		this.toggleClass(this._cardButton, 'button_alt-active');
+		this.toggleClass(this._cashButton, 'button_alt-active');
 	}
 
 	set address(value: string) {
